@@ -1,0 +1,15 @@
+export const SAMPLE_TEXT = [
+  'Digitalizacija obrazovanja poslednjih godina menja način na koji učenici i nastavnici pristupaju znanju.',
+  'Onlajn platforme omogućavaju da se nastavni materijali dele brzo, bez obzira na to gde se korisnik nalazi.',
+  'Ipak, veliki broj dostupnih tekstova stvara novi problem: korisnici često nemaju vremena da pročitaju sve što im je ponuđeno.',
+  'Upravo zato raste interesovanje za alate koji automatski izdvajaju najvažnije informacije iz dužih dokumenata.',
+  'Automatsko sažimanje teksta je oblast obrade prirodnog jezika koja se bavi kreiranjem kraćih verzija teksta uz očuvanje ključnog sadržaja.',
+  'Postoje dva osnovna pristupa: ekstraktivni, koji bira postojeće rečenice iz originala, i apstraktivni, koji generiše nove rečenice.',
+  'Ekstraktivne metode, poput algoritma TextRank, predstavljaju tekst kao graf u kome su rečenice čvorovi povezani prema međusobnoj sličnosti.',
+  'Rečenice koje su slične mnogim drugim rečenicama dobijaju veću ocenu i ulaze u sažetak.',
+  'Apstraktivne metode, zasnovane na velikim jezičkim modelima, mogu da preformulišu sadržaj i povežu ideje iz različitih delova teksta.',
+  'Njihova mana je veća računarska zahtevnost i mogućnost da u sažetak unesu informacije kojih nema u originalu.',
+  'Za jezike sa bogatom morfologijom, kao što je srpski, posebno je važna dobra predobrada teksta.',
+  'Lematizacija omogućava da se različiti oblici iste reči tretiraju kao jedna reč, što poboljšava rezultate statističkih metoda.',
+  'Kvalitet sažetaka najčešće se meri metrikama poput ROUGE, koje porede generisani sažetak sa sažetkom koji je napisao čovek.',
+].join(' ')

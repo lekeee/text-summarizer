@@ -1,0 +1,7 @@
+fastapi[standard]==0.165.0
+sumy==0.14.0
+numpy==2.5.5
+python-docx==1.2.0
+pypdf==7.1.1
+pytest==9.2.0
+snowballstemmer==3.1.1

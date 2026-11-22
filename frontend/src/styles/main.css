@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  --color-canvas: #ededeb;
+  --color-surface: #ffffff;
+
+  --color-gray-25: #fcfcfd;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f2f4f7;
+  --color-gray-200: #eaecf0;
+  --color-gray-300: #d0d5dd;
+  --color-gray-400: #98a2b3;
+  --color-gray-500: #667085;
+  --color-gray-600: #475467;
+  --color-gray-700: #344054;
+  --color-gray-800: #1d2939;
+  --color-gray-900: #101828;
+
+  --color-brand-25: #fafbff;
+  --color-brand-50: #f5f8ff;
+  --color-brand-100: #e8eefd;
+  --color-brand-600: #2463eb;
+  --color-brand-700: #1a4db8;
+
+  --color-danger-50: #fef3f2;
+  --color-danger-600: #d92d20;
+  --color-danger-700: #b42318;
+
+  --shadow-xs: var(--xs-shadow);
+  --shadow-tab: var(--tab-shadow);
+  --shadow-panel: var(--panel-shadow);
+  --shadow-panel-lg: var(--panel-lg-shadow);
+  --shadow-wizard: var(--wizard-shadow);
+  --shadow-selected: var(--selected-shadow);
+  --shadow-file: var(--file-shadow);
+  --shadow-icon: var(--icon-shadow);
+  --shadow-focus: var(--focus-shadow);
+
+  --animate-fade-up: fade-up 0.4s ease both;
+  --animate-shimmer: shimmer 1.4s linear infinite;
+  --animate-bob: bob 3.2s ease-in-out infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes shimmer {
+    from {
+      background-position: -480px 0;
+    }
+    to {
+      background-position: 480px 0;
+    }
+  }
+
+  @keyframes bob {
+    0%,
+    100% {
+      transform: translateY(0) rotate(8deg);
+    }
+    50% {
+      transform: translateY(-6px) rotate(8deg);
+    }
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-canvas font-sans text-gray-900 antialiased;
+  }
+
+  button:not(:disabled) {
+    @apply cursor-pointer;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-600;
+  }
+}
+
+:root {
+  --xs-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+  --tab-shadow: 0 1px 3px rgba(16, 24, 40, 0.12);
+  --panel-shadow: 0 0 0 1px rgba(16, 24, 40, 0.06);
+  --panel-lg-shadow: 0 0 0 1px rgba(16, 24, 40, 0.06), 0 12px 32px -16px rgba(16, 24, 40, 0.14);
+  --wizard-shadow: 0 0 0 1px rgba(16, 24, 40, 0.06), 0 0 0 9px rgba(255, 255, 255, 0.55),
+    0 30px 60px -20px rgba(16, 24, 40, 0.22);
+  --selected-shadow: 0 0 0 4px rgba(36, 99, 235, 0.12);
+  --file-shadow: 0 0 0 1px #eaecf0, 0 12px 24px -8px rgba(16, 24, 40, 0.18);
+  --icon-shadow: 0 0 0 1px #eaecf0, 0 1px 3px rgba(16, 24, 40, 0.1);
+  --focus-shadow: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-gray-900);
+  --color-skeleton: #eceef2;
+  --color-skeleton-shine: #f7f8fa;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --color-canvas: #0b0f17;
+  --color-surface: #131a27;
+  --color-skeleton: #1b2331;
+  --color-skeleton-shine: #252f40;
+
+  --color-gray-25: #111725;
+  --color-gray-50: #161d2b;
+  --color-gray-100: #1c2433;
+  --color-gray-200: #273142;
+  --color-gray-300: #364257;
+  --color-gray-400: #5d6b82;
+  --color-gray-500: #8592a8;
+  --color-gray-600: #a3aec0;
+  --color-gray-700: #c3cad6;
+  --color-gray-800: #dfe3ea;
+  --color-gray-900: #f2f4f7;
+
+  --color-brand-25: #121b31;
+  --color-brand-50: #13203f;
+  --color-brand-100: #1b2b52;
+  --color-brand-600: #3d7bf5;
+  --color-brand-700: #9dbcff;
+
+  --color-danger-50: #2a1616;
+  --color-danger-600: #f0544a;
+  --color-danger-700: #ff9b93;
+
+  --xs-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --tab-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+  --panel-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --panel-lg-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 12px 32px -16px rgba(0, 0, 0, 0.6);
+  --wizard-shadow: 0 0 0 1px rgba(255, 255, 255, 0.07), 0 0 0 9px rgba(255, 255, 255, 0.03),
+    0 30px 60px -20px rgba(0, 0, 0, 0.7);
+  --selected-shadow: 0 0 0 4px rgba(61, 123, 245, 0.22);
+  --file-shadow: 0 0 0 1px #273142, 0 12px 24px -8px rgba(0, 0, 0, 0.6);
+  --icon-shadow: 0 0 0 1px #273142, 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+@utility skeleton {
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    var(--color-skeleton) 0,
+    var(--color-skeleton-shine) 40%,
+    var(--color-skeleton) 80%
+  );
+  background-size: 960px 100%;
+  animation: var(--animate-shimmer);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
