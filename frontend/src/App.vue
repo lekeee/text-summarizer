@@ -9,7 +9,8 @@ import ResultView from './components/result/ResultView.vue'
 import SettingsStep from './components/settings/SettingsStep.vue'
 import { useSummarizer } from './composables/useSummarizer'
 
-const { screen, result, selectedMethod, methodsError, loadMethods, goToSettings, restart } = useSummarizer()
+const { screen, result, selectedMethod, methodsError, serverWaking, loadMethods, goToSettings, restart } =
+  useSummarizer()
 
 onMounted(loadMethods)
 watch(screen, () => window.scrollTo({ top: 0 }))
@@ -20,6 +21,11 @@ watch(screen, () => window.scrollTo({ top: 0 }))
     <AppHeader />
 
     <main class="mx-auto flex w-full max-w-[1200px] flex-1 flex-col gap-6 px-4 pt-4 pb-16 sm:px-6">
+      <AlertMessage
+        v-if="serverWaking"
+        tone="info"
+        message="Server se pokreće posle neaktivnosti. Prvi zahtev može da potraje do jednog minuta."
+      />
       <AlertMessage v-if="methodsError" :message="methodsError" action-label="Pokušaj ponovo" @action="loadMethods" />
 
       <div v-if="screen === 'input' || screen === 'settings'" class="flex flex-col items-center gap-7 pt-6">

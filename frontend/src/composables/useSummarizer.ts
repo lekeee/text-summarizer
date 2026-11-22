@@ -22,6 +22,7 @@ export const LOADING_PHASES = [
 ]
 
 const PHASE_DURATION_MS = 350
+const SLOW_SERVER_MS = 3000
 
 const screen = ref<Screen>('input')
 const inputMode = ref<InputMode>('file')
@@ -34,6 +35,7 @@ const ratio = ref(30)
 const loadingPhase = ref(0)
 const result = ref<SummaryResult | null>(null)
 const summarizeError = ref('')
+const serverWaking = ref(false)
 
 const selectedMethod = computed(() => methods.value.find((method) => method.id === methodId.value))
 const hasText = computed(() => text.value.trim().length > 0)
@@ -47,10 +49,20 @@ function wait(milliseconds: number) {
   return new Promise((resolve) => setTimeout(resolve, milliseconds))
 }
 
+async function whileServerWakes<T>(request: Promise<T>): Promise<T> {
+  const timer = setTimeout(() => (serverWaking.value = true), SLOW_SERVER_MS)
+  try {
+    return await request
+  } finally {
+    clearTimeout(timer)
+    serverWaking.value = false
+  }
+}
+
 async function loadMethods() {
   methodsError.value = ''
   try {
-    methods.value = await getMethods()
+    methods.value = await whileServerWakes(getMethods())
   } catch (error) {
     methodsError.value = messageOf(error)
   }
@@ -62,9 +74,11 @@ async function uploadFile(file: File) {
   text.value = ''
 
   try {
-    const document = await extractDocument(file, (progress) => {
-      current.progress = progress
-    })
+    const document = await whileServerWakes(
+      extractDocument(file, (progress) => {
+        current.progress = progress
+      }),
+    )
     if (upload.value !== current) return
 
     text.value = document.text
@@ -115,7 +129,7 @@ async function generate() {
 
   try {
     const [summary] = await Promise.all([
-      summarize(text.value, methodId.value, ratio.value),
+      whileServerWakes(summarize(text.value, methodId.value, ratio.value)),
       playLoadingPhases(),
     ])
     result.value = summary
@@ -146,6 +160,7 @@ export function useSummarizer() {
     loadingPhase,
     result,
     summarizeError,
+    serverWaking,
     selectedMethod,
     hasText,
     isUploading,
