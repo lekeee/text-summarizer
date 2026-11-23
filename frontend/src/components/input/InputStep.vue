@@ -23,7 +23,7 @@ const modes: { id: InputMode; label: string }[] = [
     <div class="flex flex-wrap items-start justify-between gap-4">
       <div class="flex flex-col gap-1">
         <h2 class="text-[22px] font-semibold">Šta želite da sažmete?</h2>
-        <span class="text-[15px] text-gray-600">Nalepite tekst ili učitajte dokument do 5 strana.</span>
+        <span class="text-[15px] text-gray-600">Nalepite tekst ili učitajte dokument do 10 strana.</span>
       </div>
 
       <div role="tablist" aria-label="Način unosa" class="flex gap-1 rounded-[10px] border border-gray-200 bg-gray-100 p-1">

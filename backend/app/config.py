@@ -14,7 +14,7 @@ class Settings:
     app_name: str = "Sistem za sažimanje teksta"
     cors_origins: list[str] = field(default_factory=read_cors_origins)
     max_file_size_mb: int = 5
-    max_pages: int = 5
+    max_pages: int = 10
     words_per_page: int = 300
     min_ratio: int = 10
     max_ratio: int = 60

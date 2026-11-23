@@ -1,9 +1,12 @@
 from fastapi.testclient import TestClient
 
+from app.config import settings
 from app.main import app
 from tests.sample_files import make_docx, make_pdf
 
 client = TestClient(app)
+
+TOO_MANY_WORDS = settings.max_pages * settings.words_per_page + 1
 
 
 def upload(file_name: str, content: bytes):
@@ -57,6 +60,6 @@ def test_rejects_broken_pdf_and_empty_file():
 
 
 def test_rejects_document_longer_than_page_limit():
-    response = upload("dug.txt", ("Reč. " * 2000).encode("utf-8"))
+    response = upload("dug.txt", ("Reč. " * TOO_MANY_WORDS).encode("utf-8"))
 
     assert response.status_code == 400

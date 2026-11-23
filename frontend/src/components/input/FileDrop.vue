@@ -45,7 +45,7 @@ function onChange(event: Event) {
       <CloudUpload :size="22" class="text-gray-700" />
     </span>
     <span class="text-base font-semibold">{{ dragging ? 'Pustite fajl ovde' : 'Prevucite dokument ovde' }}</span>
-    <span class="text-sm text-gray-600">ili kliknite za izbor · TXT, DOCX, PDF · do 5 strana</span>
+    <span class="text-sm text-gray-600">ili kliknite za izbor · TXT, DOCX, PDF · do 10 strana</span>
 
     <input id="document-file" type="file" accept=".txt,.docx,.pdf" class="sr-only" @change="onChange" />
   </label>

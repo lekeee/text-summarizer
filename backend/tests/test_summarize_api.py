@@ -1,9 +1,12 @@
 from fastapi.testclient import TestClient
 
+from app.config import settings
 from app.main import app
 from tests.sample_texts import ARTICLE
 
 client = TestClient(app)
+
+TOO_MANY_WORDS = settings.max_pages * settings.words_per_page + 1
 
 
 def test_summarize_returns_summary_scores_and_stats():
@@ -36,6 +39,6 @@ def test_blank_text_and_ratio_out_of_range_are_rejected():
 
 
 def test_text_longer_than_page_limit_is_rejected():
-    response = client.post("/api/summarize", json={"text": "Reč. " * 2000})
+    response = client.post("/api/summarize", json={"text": "Reč. " * TOO_MANY_WORDS})
 
     assert response.status_code == 400
