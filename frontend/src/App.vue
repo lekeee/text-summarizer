@@ -30,7 +30,7 @@ watch(screen, () => window.scrollTo({ top: 0 }))
 
       <div v-if="screen === 'input' || screen === 'settings'" class="flex flex-col items-center gap-7 pt-6">
         <div class="flex max-w-[640px] flex-col gap-2.5 text-center">
-          <h1 class="text-[clamp(28px,4vw,40px)] leading-tight font-bold tracking-tight">Dug dokument, kratak sažetak</h1>
+          <h1 class="text-[clamp(28px,4vw,40px)] leading-tight font-bold tracking-tight">Manje reči, isti smisao</h1>
           <p class="text-base leading-relaxed text-gray-600">U dva koraka: dodajte tekst, izaberite metod. Ostalo radi sistem.</p>
         </div>
 
