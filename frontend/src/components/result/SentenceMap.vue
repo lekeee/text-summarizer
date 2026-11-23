@@ -11,7 +11,10 @@ const props = defineProps<{ sentences: SentenceScore[] }>()
 const focusedIndex = ref(props.sentences.find((sentence) => sentence.selected)?.index ?? 0)
 const showAll = ref(false)
 
+const DENSE_MAP_FROM = 60
+
 const focused = computed(() => props.sentences[focusedIndex.value])
+const dense = computed(() => props.sentences.length > DENSE_MAP_FROM)
 
 const scoreRange = computed(() => {
   const scores = props.sentences.map((sentence) => sentence.score)
@@ -53,15 +56,18 @@ function segmentColor(sentence: SentenceScore): string {
       </div>
     </div>
 
-    <div class="flex h-12 gap-[3px]" role="list" aria-labelledby="sentence-map">
+    <div class="flex h-12" :class="dense ? 'gap-px' : 'gap-[3px]'" role="list" aria-labelledby="sentence-map">
       <button
         v-for="sentence in sentences"
         :key="sentence.index"
         type="button"
         role="listitem"
         :aria-label="`Rečenica ${sentence.index + 1}`"
-        class="min-w-1 rounded-md transition-transform duration-100"
-        :class="sentence.index === focusedIndex ? '-translate-y-[3px] shadow-focus' : ''"
+        class="min-w-0 transition-transform duration-100"
+        :class="[
+          dense ? 'rounded-[2px]' : 'rounded-md',
+          sentence.index === focusedIndex ? 'relative z-10 -translate-y-[3px] shadow-focus' : '',
+        ]"
         :style="{ flex: `${Math.max(1, countWords(sentence.text))} 1 0`, background: segmentColor(sentence) }"
         @mouseenter="focusedIndex = sentence.index"
         @focus="focusedIndex = sentence.index"
